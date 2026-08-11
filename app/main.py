@@ -1,3 +1,4 @@
+from app.core.error_handler import handle_error
 from app.core.logging import get_logger, setup_logging
 from app.database.database import init_database
 
@@ -11,15 +12,19 @@ def main() -> None:
 
     logger = get_logger(__name__)
 
-    logger.info("Assistente iniciado")
+    try:
+        logger.info("Assistente iniciado")
 
-    init_database()
+        init_database()
 
-    logger.info("Banco de dados inicializado")
+        logger.info("Banco de dados inicializado")
 
-    result = health_check()
+        result = health_check()
 
-    logger.info("Health check: %s", result)
+        logger.info("Health check: %s", result)
+
+    except Exception as error:
+        handle_error(error)
 
 
 if __name__ == "__main__":
