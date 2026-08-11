@@ -241,4 +241,5 @@ Cada milestone será dividida em pequenas **Issues**, permitindo desenvolver, te
 
 ## Status
 
-**Em desenvolvimento — M0: Fundação do projeto**
+**✅ Concluída — M0: Fundação do projeto**
+**Em desenvolvimento — M1: Telegram MVP**
