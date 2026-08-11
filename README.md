@@ -130,42 +130,73 @@ Permitir criar regras como:
 
 ## Arquitetura
 
-                    🤖 ASSISTENTE
-                          │
-                     ┌────▼────┐
-                     │ Telegram│
-                     └────┬────┘
-                          │
-                     ┌────▼────┐
-                     │  Agent  │
-                     └────┬────┘
-                          │
-             ┌────────────┼────────────┐
-             ▼            ▼            ▼
-          Memory         RAG         Tools
-             │            │            │
-             ▼            ▼       ┌────┼─────────┐
-          Database     Documents   PC Calendar  Web
+O Raspberry Pi 3 será responsável pela execução do assistente, integrações, armazenamento de dados, automações e execução das ferramentas.
 
-O LLM será responsável por interpretar solicitações e selecionar ferramentas. As ferramentas executarão as operações reais de forma controlada.
+O processamento de linguagem será realizado através de **APIs de LLM**, evitando a execução de modelos localmente no Raspberry Pi.
+
+```text
+                         🤖 ASSISTENTE
+                               │
+                         ┌─────▼─────┐
+                         │  Telegram │
+                         └─────┬─────┘
+                               │
+                         ┌─────▼─────┐
+                         │   Agent   │
+                         └─────┬─────┘
+                               │
+              ┌────────────────┼────────────────┐
+              │                │                │
+              ▼                ▼                ▼
+           Memory             RAG             Tools
+              │                │                │
+              ▼                ▼          ┌─────┼──────┐
+           Database        Documents      │     │      │
+                                          ▼     ▼      ▼
+                                      Calendar  PC    Web
+
+                               │
+                               ▼
+                         ☁️ LLM API
+```
+
+O LLM será responsável por interpretar solicitações, raciocinar sobre o contexto e selecionar as ferramentas necessárias.
+
+As ferramentas executarão as operações reais de forma controlada.
+
+O Raspberry Pi funcionará como servidor e orquestrador, enquanto o processamento pesado de IA será realizado externamente através de APIs.
 
 ## Tecnologias
 
+### Backend
+
 - Python
 - FastAPI
+- SQLite
 - Telegram Bot API
 - Google Calendar API
-- PostgreSQL / SQLite
+
+### Inteligência Artificial
+
+- LLMs via API
+- Tool Calling
+- RAG
+- Embeddings
+- Vector Database
+
+### Infraestrutura
+
+- Raspberry Pi 3
 - Docker
-- Redis
-- LLMs / Ollama
-- RAG / Vector Database
-- Prometheus
-- Grafana
 - Wake-on-LAN
 - SSH
 
-As tecnologias poderão ser alteradas conforme as necessidades do projeto.
+### Monitoramento
+
+- Prometheus
+- Grafana
+
+As tecnologias poderão ser alteradas conforme as necessidades do projeto, priorizando baixo consumo de recursos e simplicidade devido às limitações do Raspberry Pi 3.
 
 ---
 
