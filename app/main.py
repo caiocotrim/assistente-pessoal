@@ -1,4 +1,5 @@
 from app.core.logging import get_logger, setup_logging
+from app.database.database import init_database
 
 
 def health_check() -> dict:
@@ -11,6 +12,10 @@ def main() -> None:
     logger = get_logger(__name__)
 
     logger.info("Assistente iniciado")
+
+    init_database()
+
+    logger.info("Banco de dados inicializado")
 
     result = health_check()
 

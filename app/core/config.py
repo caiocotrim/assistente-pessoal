@@ -16,5 +16,14 @@ class Settings:
         "development",
     )
 
+    DATABASE_DIR: str = os.getenv(
+    "DATABASE_DIR",
+    "data",
+    )
+
+    DATABASE_NAME: str = os.getenv(
+        "DATABASE_NAME",
+        "assistant.db",
+    )
 
 settings = Settings()
